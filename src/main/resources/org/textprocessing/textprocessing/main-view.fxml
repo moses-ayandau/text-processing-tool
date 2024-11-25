@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+           fx:controller="org.textprocessing.textprocessing.RegexController"
+           style="-fx-background-color: linear-gradient(to bottom right, #1a1c1e, #2d3436);">
+
+    <ScrollPane fitToWidth="true"
+                style="-fx-background: transparent;
+                       -fx-background-color: transparent;">
+        <TabPane style="-fx-background-color: transparent;
+                       -fx-tab-min-height: 40px;
+                       -fx-tab-max-height: 40px;">
+            <tabs>
+                <Tab text="Regex Operations" closable="false">
+                    <StackPane style="-fx-background-color: rgba(255,255,255,0.05);
+                                    -fx-background-radius: 10;">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+
+                        <VBox maxWidth="800" spacing="20">
+                            <HBox alignment="CENTER_LEFT">
+                                <Label text="Regular Expression Builder"
+                                       style="-fx-text-fill: #ffffff;
+                                              -fx-font-size: 24px;
+                                              -fx-font-weight: bold;"/>
+                            </HBox>
+
+                            <VBox spacing="5">
+                                <Label text="PATTERN"
+                                       style="-fx-text-fill: #9ea7ad;
+                                              -fx-font-size: 12px;
+                                              -fx-font-weight: bold;"/>
+                                <TextField fx:id="regexInput"
+                                           style="-fx-background-color: #2b2b2b;
+                                                -fx-text-fill: white;
+                                                -fx-prompt-text-fill: #666666;
+                                                -fx-background-radius: 5;
+                                                -fx-padding: 10;
+                                                -fx-font-size: 14px;"
+                                           promptText="Enter your regex pattern"/>
+                            </VBox>
+
+                            <VBox spacing="5">
+                                <Label text="TEXT"
+                                       style="-fx-text-fill: #9ea7ad;
+                                              -fx-font-size: 12px;
+                                              -fx-font-weight: bold;"/>
+                                <TextArea fx:id="textInput"
+                                          prefHeight="150"
+                                          maxHeight="300"
+                                          wrapText="true"
+                                          style="-fx-control-inner-background: #2b2b2b;
+                                               -fx-background-color: #2b2b2b;
+                                               -fx-text-fill: white;
+                                               -fx-prompt-text-fill: #666666;
+                                               -fx-background-radius: 5;
+                                               -fx-padding: 10;
+                                               -fx-font-size: 14px;"
+                                          promptText="Paste your text here"/>
+                            </VBox>
+
+                            <VBox spacing="5">
+                                <Label text="REPLACEMENT"
+                                       style="-fx-text-fill: #9ea7ad;
+                                              -fx-font-size: 12px;
+                                              -fx-font-weight: bold;"/>
+                                <TextField fx:id="replaceInput"
+                                           style="-fx-background-color: #2b2b2b;
+                                                -fx-text-fill: white;
+                                                -fx-prompt-text-fill: #666666;
+                                                -fx-background-radius: 5;
+                                                -fx-padding: 10;
+                                                -fx-font-size: 14px;"
+                                           promptText="Enter replacement text"/>
+                            </VBox>
+
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Button text="MATCH" onAction="#matchRegex"
+                                        style="-fx-background-color: #2196f3;
+                                               -fx-text-fill: white;
+                                               -fx-font-weight: bold;
+                                               -fx-padding: 10 20;
+                                               -fx-background-radius: 5;
+                                               -fx-cursor: hand;">
+                                    <HBox.margin>
+                                        <Insets top="10" bottom="10"/>
+                                    </HBox.margin>
+                                </Button>
+                                <Button text="REPLACE" onAction="#replaceRegex"
+                                        style="-fx-background-color: #4caf50;
+                                               -fx-text-fill: white;
+                                               -fx-font-weight: bold;
+                                               -fx-padding: 10 20;
+                                               -fx-background-radius: 5;
+                                               -fx-cursor: hand;"/>
+                            </HBox>
+
+                            <VBox spacing="5">
+                                <Label text="RESULTS"
+                                       style="-fx-text-fill: #9ea7ad;
+                                              -fx-font-size: 12px;
+                                              -fx-font-weight: bold;"/>
+                                <TextArea fx:id="resultOutput"
+                                          prefHeight="150"
+                                          maxHeight="300"
+                                          editable="false"
+                                          wrapText="true"
+                                          style="-fx-control-inner-background: #2b2b2b;
+                                               -fx-background-color: #2b2b2b;
+                                               -fx-text-fill: #00ff00;
+                                               -fx-font-family: 'Courier New';
+                                               -fx-background-radius: 5;
+                                               -fx-padding: 10;
+                                               -fx-font-size: 14px;"/>
+                            </VBox>
+                        </VBox>
+                    </StackPane>
+                </Tab>
+
+                <Tab text="Data Management" closable="false">
+                    <StackPane style="-fx-background-color: rgba(255,255,255,0.05);
+                                    -fx-background-radius: 10;">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+
+                        <VBox maxWidth="800" spacing="20">
+                            <HBox alignment="CENTER_LEFT">
+                                <Label text="Data Management"
+                                       style="-fx-text-fill: #ffffff;
+                                              -fx-font-size: 24px;
+                                              -fx-font-weight: bold;"/>
+                            </HBox>
+
+                            <GridPane hgap="15" vgap="15">
+                                <VBox spacing="5" GridPane.columnIndex="0"
+                                      GridPane.rowIndex="0" GridPane.columnSpan="2">
+                                    <Label text="KEY"
+                                           style="-fx-text-fill: #9ea7ad;
+                                                  -fx-font-size: 12px;
+                                                  -fx-font-weight: bold;"/>
+                                    <TextField fx:id="keyField"
+                                               style="-fx-background-color: #2b2b2b;
+                                                    -fx-text-fill: white;
+                                                    -fx-prompt-text-fill: #666666;
+                                                    -fx-background-radius: 5;
+                                                    -fx-padding: 10;
+                                                    -fx-font-size: 14px;"
+                                               promptText="Enter key"/>
+                                </VBox>
+
+                                <VBox spacing="5" GridPane.columnIndex="0"
+                                      GridPane.rowIndex="1" GridPane.columnSpan="2">
+                                    <Label text="VALUE"
+                                           style="-fx-text-fill: #9ea7ad;
+                                                  -fx-font-size: 12px;
+                                                  -fx-font-weight: bold;"/>
+                                    <TextField fx:id="valueField"
+                                               style="-fx-background-color: #2b2b2b;
+                                                    -fx-text-fill: white;
+                                                    -fx-prompt-text-fill: #666666;
+                                                    -fx-background-radius: 5;
+                                                    -fx-padding: 10;
+                                                    -fx-font-size: 14px;"
+                                               promptText="Enter value"/>
+                                </VBox>
+
+                                <HBox spacing="15" alignment="CENTER_LEFT"
+                                      GridPane.columnIndex="0" GridPane.rowIndex="2"
+                                      GridPane.columnSpan="2">
+                                    <Button text="ADD / UPDATE" onAction="#addOrUpdateData"
+                                            style="-fx-background-color: #2196f3;
+                                                   -fx-text-fill: white;
+                                                   -fx-font-weight: bold;
+                                                   -fx-padding: 10 20;
+                                                   -fx-background-radius: 5;
+                                                   -fx-cursor: hand;"/>
+                                    <Button text="DELETE" onAction="#deleteData"
+                                            style="-fx-background-color: #f44336;
+                                                   -fx-text-fill: white;
+                                                   -fx-font-weight: bold;
+                                                   -fx-padding: 10 20;
+                                                   -fx-background-radius: 5;
+                                                   -fx-cursor: hand;"/>
+                                </HBox>
+                            </GridPane>
+
+                            <VBox spacing="5" VBox.vgrow="ALWAYS">
+                                <Label text="STORED DATA"
+                                       style="-fx-text-fill: #9ea7ad;
+                                              -fx-font-size: 12px;
+                                              -fx-font-weight: bold;"/>
+                                <ListView fx:id="dataList"
+                                          prefHeight="300"
+                                          maxHeight="400"
+                                          VBox.vgrow="ALWAYS"
+                                          style="-fx-background-color: #2b2b2b;
+                                               -fx-control-inner-background: #2b2b2b;
+                                               -fx-background-radius: 5;">
+                                    <style>
+                                        .list-cell {
+                                        -fx-text-fill: white;
+                                        -fx-background-color: #2b2b2b;
+                                        }
+                                        .list-cell:filled:selected {
+                                        -fx-background-color: #3b3b3b;
+                                        }
+                                        .list-cell:filled:hover {
+                                        -fx-background-color: #3b3b3b;
+                                        }
+                                    </style>
+                                </ListView>
+                            </VBox>
+                        </VBox>
+                    </StackPane>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </ScrollPane>
+</StackPane>
