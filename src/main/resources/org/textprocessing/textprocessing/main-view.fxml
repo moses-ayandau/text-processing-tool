@@ -5,6 +5,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.shape.Rectangle?>
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
            fx:controller="org.textprocessing.textprocessing.RegexController"
            style="-fx-background-color: linear-gradient(to bottom right, #1a1c1e, #2d3436);">
@@ -231,6 +232,56 @@
                         </VBox>
                     </StackPane>
                 </Tab>
+                <Tab text="Regex Examples" closable="false">
+                    <StackPane style="-fx-background-color: rgba(255,255,255,0.05);
+                    -fx-background-radius: 10;">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+
+                        <VBox maxWidth="800" spacing="20">
+                            <!-- Title -->
+                            <HBox alignment="CENTER">
+                                <Label text="Common Regex Examples"
+                                       style="-fx-text-fill: #ffffff;
+                              -fx-font-size: 24px;
+                              -fx-font-weight: bold;"/>
+                            </HBox>
+
+                            <!-- ListView -->
+                            <VBox spacing="5" VBox.vgrow="ALWAYS">
+                                <Label text="Examples"
+                                       style="-fx-text-fill: #9ea7ad;
+                              -fx-font-size: 12px;
+                              -fx-font-weight: bold;"/>
+                                <ListView fx:id="examplesList"
+                                          prefHeight="300"
+                                          maxHeight="400"
+                                          VBox.vgrow="ALWAYS"
+                                          style="-fx-background-color: #2b2b2b;
+                                 -fx-control-inner-background: #2b2b2b;
+                                 -fx-background-radius: 5;
+                                 -fx-padding: 10;">
+                                    <style>
+                                        .list-cell {
+                                        -fx-text-fill: white;
+                                        -fx-padding: 10;
+                                        -fx-background-color: #2b2b2b;
+                                        }
+                                        .list-cell:filled:selected {
+                                        -fx-background-color: #3b3b3b;
+                                        }
+                                        .list-cell:filled:hover {
+                                        -fx-background-color: #3b3b3b;
+                                        }
+                                    </style>
+                                </ListView>
+                            </VBox>
+                        </VBox>
+                    </StackPane>
+                </Tab>
+
+
             </tabs>
 
             <padding>

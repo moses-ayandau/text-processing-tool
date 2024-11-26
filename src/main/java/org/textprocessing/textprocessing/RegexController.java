@@ -4,12 +4,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegexController {
+
+    @FXML private TableView<RegexExample> examplesTable;
+    @FXML private TableColumn<RegexExample, String> regexColumn;
+    @FXML private TableColumn<RegexExample, String> descriptionColumn;
+    @FXML
+    private ListView<String> examplesList;
 
     // Regex Module Components
     @FXML private TextField regexInput;
@@ -36,18 +43,27 @@ public class RegexController {
 
         regexInput.textProperty().addListener((observable, oldValue, newValue) -> updateButtonState());
         textInput.textProperty().addListener((observable, oldValue, newValue) -> updateButtonState());
+
+        ObservableList<String> examples = FXCollections.observableArrayList(
+                new RegexExample("\\d+", "Matches one or more digits.", "12345").toString(),
+                new RegexExample("\\w+", "Matches one or more word characters.", "hello_world").toString(),
+                new RegexExample("[A-Za-z]+", "Matches alphabetic characters only.", "HelloWorld").toString(),
+                new RegexExample("\\b[A-Z][a-z]*\\b", "Matches words starting with a capital letter.", "Apple, Banana").toString(),
+                new RegexExample("\\s", "Matches whitespace characters.", "space\ttab\nnewline").toString()
+        );
+
+        examplesList.setItems(examples);
     }
 
     private void updateButtonState() {
         boolean isRegexFilled = !regexInput.getText().trim().isEmpty();
         boolean isTextFilled = !textInput.getText().trim().isEmpty();
 
-        // Enable the button only if both fields are filled
         addReplacementToCollectionButton.setDisable(!(isRegexFilled && isTextFilled));
     }
 
 
-    // ==== Regex Operations ====
+
     public void matchRegex() {
         String regex = regexInput.getText().trim();
         String text = textInput.getText().trim();
