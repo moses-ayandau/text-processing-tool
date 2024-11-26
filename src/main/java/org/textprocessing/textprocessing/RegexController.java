@@ -15,22 +15,37 @@ public class RegexController {
     @FXML private TextField regexInput;
     @FXML private TextArea textInput;
     @FXML private TextField replaceInput;
-    @FXML private TextArea  resultOutput;
+    @FXML private TextArea resultOutput;
+    @FXML private Button addReplacementToCollectionButton;
 
-    // Data Management Module Components
     @FXML private TextField keyField;
     @FXML private TextField valueField;
     @FXML private ListView<String> dataList;
 
-    // Data storage
+    // HashMap for Data storage
     private final Map<String, CustomData> dataMap = new HashMap<>();
     private final ObservableList<String> observableList = FXCollections.observableArrayList();
 
+    private String lastMatch;
+
     @FXML
     public void initialize() {
-        // Initialize the list view for the data management module
         dataList.setItems(observableList);
+
+        addReplacementToCollectionButton.setDisable(true);
+
+        regexInput.textProperty().addListener((observable, oldValue, newValue) -> updateButtonState());
+        textInput.textProperty().addListener((observable, oldValue, newValue) -> updateButtonState());
     }
+
+    private void updateButtonState() {
+        boolean isRegexFilled = !regexInput.getText().trim().isEmpty();
+        boolean isTextFilled = !textInput.getText().trim().isEmpty();
+
+        // Enable the button only if both fields are filled
+        addReplacementToCollectionButton.setDisable(!(isRegexFilled && isTextFilled));
+    }
+
 
     // ==== Regex Operations ====
     public void matchRegex() {
@@ -38,7 +53,7 @@ public class RegexController {
         String text = textInput.getText().trim();
 
         if (regex.isEmpty() || text.isEmpty()) {
-            showAlert("Error", "Regex pattern and text cannot be empty.");
+            showAlert("Error", "Regex pattern and text cannot be empty.", Alert.AlertType.ERROR);
             return;
         }
 
@@ -55,7 +70,7 @@ public class RegexController {
 
             resultOutput.setText(matches.length() > 0 ? matches.toString() : "No matches found.");
         } catch (Exception e) {
-            showAlert("Error", "Invalid regex pattern: " + e.getMessage());
+            showAlert("Error", "Invalid regex pattern: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -65,7 +80,7 @@ public class RegexController {
         String replacement = replaceInput.getText();
 
         if (regex.isEmpty() || text.isEmpty()) {
-            showAlert("Error", "Regex pattern and text cannot be empty.");
+            showAlert("Error", "Regex pattern and text cannot be empty.", Alert.AlertType.ERROR);
             return;
         }
 
@@ -73,20 +88,55 @@ public class RegexController {
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(text);
 
+            String lastReplacement;
+            if (matcher.find()) {
+                // Store the first match and its replacement for collection
+                lastMatch = matcher.group();
+                lastReplacement = replacement;
+
+                // Enable the button for adding to collection
+                addReplacementToCollectionButton.setDisable(false);
+            } else {
+                lastMatch = null;
+                lastReplacement = null;
+                addReplacementToCollectionButton.setDisable(true);
+            }
+
             String replacedText = matcher.replaceAll(replacement);
             resultOutput.setText(replacedText);
         } catch (Exception e) {
-            showAlert("Error", "Invalid regex pattern: " + e.getMessage());
+            showAlert("Error", "Invalid regex pattern: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
     // ==== Data Management Operations ====
+    public void addReplacementToCollection() {
+        String text = textInput.getText().trim();
+
+        if (lastMatch == null || text == null) {
+            showAlert("Error", "No match and textment available to add.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        CustomData newData = new CustomData(lastMatch, text);
+        dataMap.put(lastMatch, newData);
+        showAlert("Success", "Item added to the collections", Alert.AlertType.CONFIRMATION);
+        refreshList();
+
+        // Disable the button after adding
+        addReplacementToCollectionButton.setDisable(true);
+
+        // Clear temporary storage
+        lastMatch = null;
+        text = null;
+    }
+
     public void addOrUpdateData() {
         String key = keyField.getText().trim();
         String value = valueField.getText().trim();
 
         if (key.isEmpty() || value.isEmpty()) {
-            showAlert("Error", "Key and Value cannot be empty.");
+            showAlert("Error", "Key or Value cannot be empty.", Alert.AlertType.ERROR);
             return;
         }
 
@@ -98,7 +148,7 @@ public class RegexController {
     public void deleteData() {
         String selected = dataList.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            showAlert("Error", "No item selected for deletion.");
+            showAlert("Error", "No item selected for deletion. Please click on an item to delete", Alert.AlertType.INFORMATION);
             return;
         }
 
@@ -114,9 +164,8 @@ public class RegexController {
         }
     }
 
-    // ==== Utility Methods ====
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    private void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();

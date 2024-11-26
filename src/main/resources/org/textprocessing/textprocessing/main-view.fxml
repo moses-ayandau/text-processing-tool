@@ -12,6 +12,7 @@
     <ScrollPane fitToWidth="true"
                 style="-fx-background: transparent;
                        -fx-background-color: transparent;">
+
         <TabPane style="-fx-background-color: transparent;
                        -fx-tab-min-height: 40px;
                        -fx-tab-max-height: 40px;">
@@ -24,10 +25,10 @@
                         </padding>
 
                         <VBox maxWidth="800" spacing="20">
-                            <HBox alignment="CENTER_LEFT">
-                                <Label text="Regular Expression Builder"
+                            <HBox alignment="CENTER">
+                                <Label text="RegeX Manipulations"
                                        style="-fx-text-fill: #ffffff;
-                                              -fx-font-size: 24px;
+                                              -fx-font-size: 28px;
                                               -fx-font-weight: bold;"/>
                             </HBox>
 
@@ -52,7 +53,7 @@
                                               -fx-font-size: 12px;
                                               -fx-font-weight: bold;"/>
                                 <TextArea fx:id="textInput"
-                                          prefHeight="150"
+                                          prefHeight="200"
                                           maxHeight="300"
                                           wrapText="true"
                                           style="-fx-control-inner-background: #2b2b2b;
@@ -81,7 +82,7 @@
                             </VBox>
 
                             <HBox spacing="15" alignment="CENTER_LEFT">
-                                <Button text="MATCH" onAction="#matchRegex"
+                                <Button text="SEARCH" onAction="#matchRegex"
                                         style="-fx-background-color: #2196f3;
                                                -fx-text-fill: white;
                                                -fx-font-weight: bold;
@@ -99,6 +100,15 @@
                                                -fx-padding: 10 20;
                                                -fx-background-radius: 5;
                                                -fx-cursor: hand;"/>
+
+                                <Button fx:id="addReplacementToCollectionButton" text="Add to Collection" onAction="#addReplacementToCollection"
+                                        style="-fx-background-color: #0d0602;
+                                               -fx-text-fill: white;
+                                               -fx-font-weight: bold;
+                                               -fx-padding: 10 20;
+                                               -fx-background-radius: 5;
+                                               -fx-cursor: hand;"/>
+
                             </HBox>
 
                             <VBox spacing="5">
@@ -123,7 +133,7 @@
                     </StackPane>
                 </Tab>
 
-                <Tab text="Data Management" closable="false">
+                <Tab text="Data Management"  closable="false">
                     <StackPane style="-fx-background-color: rgba(255,255,255,0.05);
                                     -fx-background-radius: 10;">
                         <padding>
@@ -131,7 +141,7 @@
                         </padding>
 
                         <VBox maxWidth="800" spacing="20">
-                            <HBox alignment="CENTER_LEFT">
+                            <HBox alignment="CENTER">
                                 <Label text="Data Management"
                                        style="-fx-text-fill: #ffffff;
                                               -fx-font-size: 24px;
@@ -221,6 +231,10 @@
                     </StackPane>
                 </Tab>
             </tabs>
+
+            <padding>
+                <Insets top="10" bottom="10"/>
+            </padding>
         </TabPane>
     </ScrollPane>
 </StackPane>
