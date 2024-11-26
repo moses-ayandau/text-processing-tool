@@ -4,11 +4,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class RegexController {
 
@@ -106,7 +112,6 @@ public class RegexController {
 
             String lastReplacement;
             if (matcher.find()) {
-                // Store the first match and its replacement for collection
                 lastMatch = matcher.group();
                 lastReplacement = replacement;
 
@@ -177,6 +182,36 @@ public class RegexController {
         observableList.clear();
         for (CustomData data : dataMap.values()) {
             observableList.add(data.toString());
+        }
+    }
+
+    @FXML
+    public void saveToFile() {
+        String regex = regexInput.getText().trim();
+        String text = textInput.getText().trim();
+        String replacement = replaceInput.getText().trim();
+        String result = resultOutput.getText().trim();
+
+        if (regex.isEmpty() || text.isEmpty() || replacement.isEmpty() || result.isEmpty()) {
+            showAlert("Error", "All fields (Regex, Text, Replacement, Result) must be filled to save.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Regex Details");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write("Regex Pattern: " + regex + "\n");
+                writer.write("Input Text: " + text + "\n");
+                writer.write("Replacement Text: " + replacement + "\n");
+                writer.write("Result Text: " + result + "\n");
+                showAlert("Success", "File saved successfully to: " + file.getAbsolutePath(), Alert.AlertType.INFORMATION);
+            } catch (IOException e) {
+                showAlert("Error", "Failed to save the file: " + e.getMessage(), Alert.AlertType.ERROR);
+            }
         }
     }
 

@@ -6,7 +6,7 @@
 - Search functionality through the text for the pattern
 - Replace found patterns with user's own
 - Save the data as key value pairs in hashMap
+- Save as file to the local machine of the user
 
 ## Screen display
-<img width="967" alt="regex_sc_1" src="https://github.com/user-attachments/assets/6086b290-d17a-4c3b-8d94-0a8ca77d8cdb">
 <img width="962" alt="data_mg_1" src="https://github.com/user-attachments/assets/ba021f26-780d-4c30-852f-0b4db2836fe2">

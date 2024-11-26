@@ -3,9 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.shape.Rectangle?>
 
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 <StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
            fx:controller="org.textprocessing.textprocessing.RegexController"
            style="-fx-background-color: linear-gradient(to bottom right, #1a1c1e, #2d3436);">
@@ -104,6 +102,14 @@
 
                                 <Button fx:id="addReplacementToCollectionButton" text="Add to Collection" onAction="#addReplacementToCollection"
                                         style="-fx-background-color: #0d0602;
+                                               -fx-text-fill: white;
+                                               -fx-font-weight: bold;
+                                               -fx-padding: 10 20;
+                                               -fx-background-radius: 5;
+                                               -fx-cursor: hand;"/>
+
+                                <Button  text="Save as File" onAction="#saveToFile"
+                                        style="-fx-background-color: #06301a;
                                                -fx-text-fill: white;
                                                -fx-font-weight: bold;
                                                -fx-padding: 10 20;
