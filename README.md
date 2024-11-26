@@ -10,3 +10,5 @@
 
 ## Screen display
 <img width="962" alt="data_mg_1" src="https://github.com/user-attachments/assets/ba021f26-780d-4c30-852f-0b4db2836fe2">
+<img width="960" alt="re_ex_1" src="https://github.com/user-attachments/assets/31b9b139-0a15-4fa7-ae27-9274b60afc71">
+
