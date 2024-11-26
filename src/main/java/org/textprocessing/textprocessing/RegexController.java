@@ -19,7 +19,7 @@ public class RegexController {
     @FXML private Button addReplacementToCollectionButton;
 
     @FXML private TextField keyField;
-    @FXML private TextField valueField;
+    @FXML private TextArea valueField;
     @FXML private ListView<String> dataList;
 
     // HashMap for Data storage
