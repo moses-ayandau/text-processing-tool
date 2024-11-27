@@ -63,6 +63,8 @@
                                                -fx-padding: 10;
                                                -fx-font-size: 14px;"
                                           promptText="Paste your text here"/>
+                                <Button text="Upload File" onAction="#uploadFileAsInput" />
+
                             </VBox>
 
                             <VBox spacing="5">
@@ -100,7 +102,7 @@
                                                -fx-background-radius: 5;
                                                -fx-cursor: hand;"/>
 
-                                <Button fx:id="addReplacementToCollectionButton" text="Add to Collection" onAction="#addReplacementToCollection"
+                                <Button fx:id="addReplacementToCollectionButton" text="Add to Collection" onAction="#addTextAndPatternToCollection"
                                         style="-fx-background-color: #0d0602;
                                                -fx-text-fill: white;
                                                -fx-font-weight: bold;

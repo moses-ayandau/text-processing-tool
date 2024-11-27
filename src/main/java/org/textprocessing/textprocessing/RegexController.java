@@ -55,8 +55,19 @@ public class RegexController {
                 new RegexExample("\\w+", "Matches one or more word characters.", "hello_world").toString(),
                 new RegexExample("[A-Za-z]+", "Matches alphabetic characters only.", "HelloWorld").toString(),
                 new RegexExample("\\b[A-Z][a-z]*\\b", "Matches words starting with a capital letter.", "Apple, Banana").toString(),
-                new RegexExample("\\s", "Matches whitespace characters.", "space\ttab\nnewline").toString()
+                new RegexExample("\\s", "Matches whitespace characters.", "space\ttab\nnewline").toString(),
+                new RegexExample("\\d{4}", "Matches exactly four digits.", "2024").toString(),
+                new RegexExample("\\b\\d{1,3}(,\\d{3})*(\\.\\d+)?\\b", "Matches numbers with commas (e.g., 1,000 or 1,000.23).", "1,000,000").toString(),
+                new RegexExample("\\w+@\\w+\\.\\w+", "Matches a basic email address.", "example@test.com").toString(),
+                new RegexExample("^\\d{3}-\\d{2}-\\d{4}$", "Matches a US Social Security number format.", "123-45-6789").toString(),
+                new RegexExample("(?i)hello", "Matches 'hello' in a case-insensitive manner.", "Hello, HELLO, hello").toString(),
+                new RegexExample("(\\d{3})-(\\d{3})-(\\d{4})", "Matches a phone number format.", "123-456-7890").toString(),
+                new RegexExample("^https?://\\S+$", "Matches URLs starting with 'http' or 'https'.", "https://example.com").toString(),
+                new RegexExample("\\b(?=\\w{6,})(?=.*\\d)(?=.*[A-Z])(?=.*[a-z]).*\\b", "Matches passwords with at least 6 characters, one digit, one uppercase, and one lowercase.", "Password1").toString(),
+                new RegexExample("([01]?\\d|2[0-3]):[0-5]\\d", "Matches 24-hour time format.", "23:59").toString(),
+                new RegexExample("([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}", "Matches a MAC address.", "00:1A:2B:3C:4D:5E").toString()
         );
+
 
         examplesList.setItems(examples);
     }
@@ -130,8 +141,7 @@ public class RegexController {
         }
     }
 
-    // ==== Data Management Operations ====
-    public void addReplacementToCollection() {
+    public void addTextAndPatternToCollection() {
         String text = textInput.getText().trim();
 
         if (lastMatch == null || text == null) {
@@ -214,6 +224,37 @@ public class RegexController {
             }
         }
     }
+
+    @FXML
+    public void uploadFileAsInput() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Text File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"),
+                new FileChooser.ExtensionFilter("All Files", "*.*")
+        );
+
+
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            try {
+
+                StringBuilder content = new StringBuilder();
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine()) {
+                    content.append(scanner.nextLine()).append("\n");
+                }
+                scanner.close();
+
+
+                textInput.setText(content.toString());
+            } catch (IOException e) {
+                showAlert("Error", "Failed to read the file: " + e.getMessage(), Alert.AlertType.ERROR);
+            }
+        }
+    }
+
 
     private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
