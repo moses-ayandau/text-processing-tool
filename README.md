@@ -10,9 +10,12 @@
 - Save as file to the local machine of the user
 
 ## Screen display
-<img width="971" alt="lt_1" src="https://github.com/user-attachments/assets/09f796a1-5fb9-407b-856e-61250b220a23">
+<img width="989" alt="modified_1" src="https://github.com/user-attachments/assets/d1957a13-ad54-4222-8d9e-9bc541c51cae">
 
-<img width="960" alt="re_ex_1" src="https://github.com/user-attachments/assets/31b9b139-0a15-4fa7-ae27-9274b60afc71">
-<img width="971" alt="ex_1" src="https://github.com/user-attachments/assets/96f24e1d-1abb-4fbb-81a0-52aa3a4275d3">
+
+<img width="953" alt="modified_3" src="https://github.com/user-attachments/assets/f532695a-379b-49e6-abce-d6a87c724172">
+
+<img width="1007" alt="modified_2" src="https://github.com/user-attachments/assets/c885f5c9-da3e-4096-9d79-52241ef57cae">
+
 
 
