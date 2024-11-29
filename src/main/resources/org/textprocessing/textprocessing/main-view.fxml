@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
+<?import java.net.URL?>
 <StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
            fx:controller="org.textprocessing.textprocessing.RegexController"
            style="-fx-background-color: linear-gradient(to bottom right, #1a1c1e, #2d3436);">
@@ -14,11 +15,13 @@
 
         <TabPane style="-fx-background-color: transparent;
                        -fx-tab-min-height: 40px;
-                       -fx-tab-max-height: 40px;">
-            <tabs>
-                <Tab text="Regex Operations" closable="false">
+                       -fx-tab-max-height: 40px;
+                        ">
+            <tabs >
+                <Tab text="Regex Operations" closable="false" style="-fx-border-radius: 5px;">
+
                     <StackPane style="-fx-background-color: rgba(255,255,255,0.05);
-                                    -fx-background-radius: 10;">
+                    -fx-background-radius: 10;">
                         <padding>
                             <Insets top="20" right="20" bottom="20" left="20"/>
                         </padding>
@@ -27,122 +30,139 @@
                             <HBox alignment="CENTER">
                                 <Label text="RegeX Manipulations"
                                        style="-fx-text-fill: #ffffff;
-                                              -fx-font-size: 28px;
-                                              -fx-font-weight: bold;"/>
+                              -fx-font-size: 28px;
+                              -fx-font-weight: bold;"/>
                             </HBox>
 
                             <VBox spacing="5">
                                 <Label text="PATTERN"
                                        style="-fx-text-fill: #9ea7ad;
-                                              -fx-font-size: 12px;
-                                              -fx-font-weight: bold;"/>
+                              -fx-font-size: 12px;
+                              -fx-font-weight: bold;"/>
                                 <TextField fx:id="regexInput"
                                            style="-fx-background-color: #2b2b2b;
-                                                -fx-text-fill: white;
-                                                -fx-prompt-text-fill: #666666;
-                                                -fx-background-radius: 5;
-                                                -fx-padding: 10;
-                                                -fx-font-size: 14px;"
+                                -fx-text-fill: white;
+                                -fx-prompt-text-fill: #666666;
+                                -fx-background-radius: 5;
+                                -fx-padding: 10;
+                                -fx-font-size: 14px;"
                                            promptText="Enter your regex pattern"/>
                             </VBox>
 
                             <VBox spacing="5">
                                 <Label text="TEXT"
                                        style="-fx-text-fill: #9ea7ad;
-                                              -fx-font-size: 12px;
-                                              -fx-font-weight: bold;"/>
+                              -fx-font-size: 12px;
+                              -fx-font-weight: bold;"/>
                                 <TextArea fx:id="textInput"
-                                          prefHeight="200"
-                                          maxHeight="300"
+                                          prefHeight="300"
+                                          maxHeight="400"
                                           wrapText="true"
                                           style="-fx-control-inner-background: #2b2b2b;
-                                               -fx-background-color: #2b2b2b;
-                                               -fx-text-fill: white;
-                                               -fx-prompt-text-fill: #666666;
-                                               -fx-background-radius: 5;
-                                               -fx-padding: 10;
-                                               -fx-font-size: 14px;"
+                               -fx-background-color: #2b2b2b;
+                               -fx-text-fill: white;
+                               -fx-prompt-text-fill: #666666;
+                               -fx-background-radius: 5;
+                               -fx-padding: 10;
+                               -fx-font-size: 14px;"
                                           promptText="Paste your text here"/>
-                                <Button text="Upload File" onAction="#uploadFileAsInput" />
+                                <Button text="Upload File" onAction="#uploadFileAsInput"
+                                        style="-fx-background-color: #363a3c;
+                                   -fx-text-fill: #ffffff;
+                                   -fx-font-weight: bold;
+                                   -fx-padding: 10 20;
+                                   -fx-background-radius: 5;
+                                   -fx-cursor: hand;
+                                   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);"
+                                        styleClass="file-button">
 
+                                </Button>
                             </VBox>
 
                             <VBox spacing="5">
                                 <Label text="REPLACEMENT"
                                        style="-fx-text-fill: #9ea7ad;
-                                              -fx-font-size: 12px;
-                                              -fx-font-weight: bold;"/>
+                              -fx-font-size: 12px;
+                              -fx-font-weight: bold;"/>
                                 <TextField fx:id="replaceInput"
                                            style="-fx-background-color: #2b2b2b;
-                                                -fx-text-fill: white;
-                                                -fx-prompt-text-fill: #666666;
-                                                -fx-background-radius: 5;
-                                                -fx-padding: 10;
-                                                -fx-font-size: 14px;"
+                                -fx-text-fill: white;
+                                -fx-prompt-text-fill: #666666;
+                                -fx-background-radius: 5;
+                                -fx-padding: 10;
+                                -fx-font-size: 14px;"
                                            promptText="Enter replacement text"/>
                             </VBox>
 
                             <HBox spacing="15" alignment="CENTER_LEFT">
                                 <Button text="SEARCH" onAction="#matchRegex"
-                                        style="-fx-background-color: #2196f3;
-                                               -fx-text-fill: white;
-                                               -fx-font-weight: bold;
-                                               -fx-padding: 10 20;
-                                               -fx-background-radius: 5;
-                                               -fx-cursor: hand;">
-                                    <HBox.margin>
-                                        <Insets top="10" bottom="10"/>
-                                    </HBox.margin>
-                                </Button>
+                                        style="-fx-background-color: #1a5f7a;
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-padding: 10 20;
+                               -fx-background-radius: 5;
+                               -fx-cursor: hand;
+                               -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);"
+                                        styleClass="search-button"/>
+
                                 <Button text="REPLACE" onAction="#replaceRegex"
-                                        style="-fx-background-color: #4caf50;
-                                               -fx-text-fill: white;
-                                               -fx-font-weight: bold;
-                                               -fx-padding: 10 20;
-                                               -fx-background-radius: 5;
-                                               -fx-cursor: hand;"/>
-
-                                <Button fx:id="addReplacementToCollectionButton" text="Add to Collection" onAction="#addTextAndPatternToCollection"
-                                        style="-fx-background-color: #0d0602;
-                                               -fx-text-fill: white;
-                                               -fx-font-weight: bold;
-                                               -fx-padding: 10 20;
-                                               -fx-background-radius: 5;
-                                               -fx-cursor: hand;"/>
-
-                                <Button  text="Save as File" onAction="#saveToFile"
-                                        style="-fx-background-color: #06301a;
-                                               -fx-text-fill: white;
-                                               -fx-font-weight: bold;
-                                               -fx-padding: 10 20;
-                                               -fx-background-radius: 5;
-                                               -fx-cursor: hand;"/>
+                                        style="-fx-background-color: #2c7a4b;
+                           -fx-text-fill: white;
+                           -fx-font-weight: bold;
+                           -fx-padding: 10 20;
+                           -fx-background-radius: 5;
+                           -fx-cursor: hand;
+                           -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);"
+                                        styleClass="replace-button"/>
 
                             </HBox>
 
                             <VBox spacing="5">
                                 <Label text="RESULTS"
                                        style="-fx-text-fill: #9ea7ad;
-                                              -fx-font-size: 12px;
-                                              -fx-font-weight: bold;"/>
+                              -fx-font-size: 12px;
+                              -fx-font-weight: bold;"/>
                                 <TextArea fx:id="resultOutput"
-                                          prefHeight="150"
-                                          maxHeight="300"
+                                          prefHeight="300"
+                                          maxHeight="400"
                                           editable="false"
                                           wrapText="true"
                                           style="-fx-control-inner-background: #2b2b2b;
-                                               -fx-background-color: #2b2b2b;
-                                               -fx-text-fill: #00ff00;
-                                               -fx-font-family: 'Courier New';
-                                               -fx-background-radius: 5;
-                                               -fx-padding: 10;
-                                               -fx-font-size: 14px;"/>
+                               -fx-background-color: #2b2b2b;
+                               -fx-text-fill: #00ff00;
+                               -fx-font-family: 'Courier New';
+                               -fx-background-radius: 5;
+                               -fx-padding: 10;
+                               -fx-font-size: 14px;"/>
                             </VBox>
+
+
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Button fx:id="addReplacementToCollectionButton" text="Add to Collection" onAction="#addTextAndPatternToCollection"
+                                        style="-fx-background-color: #0d0602;
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-padding: 10 20;
+                               -fx-background-radius: 5;
+                               -fx-cursor: hand;"/>
+                                <Button text="Save as File" onAction="#saveToFile"
+                                        style="-fx-background-color: #1e4d3c;
+                           -fx-text-fill: white;
+                           -fx-font-weight: bold;
+                           -fx-padding: 10 20;
+                           -fx-background-radius: 5;
+                           -fx-cursor: hand;
+                           -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);"
+                                        styleClass="save-button"/>
+                            </HBox>
                         </VBox>
                     </StackPane>
                 </Tab>
 
-                <Tab text="Data Management"  closable="false">
+
+
+                <Tab text="Data Management"  closable="false" style="-fx-background-color: #0d0101; -fx-text-fill:#ffffff;">
+
                     <StackPane style="-fx-background-color: rgba(255,255,255,0.05);
                                     -fx-background-radius: 10;">
                         <padding>
@@ -194,15 +214,17 @@
                                 <HBox spacing="15" alignment="CENTER_LEFT"
                                       GridPane.columnIndex="0" GridPane.rowIndex="2"
                                       GridPane.columnSpan="2">
-                                    <Button text="ADD / UPDATE" onAction="#addOrUpdateData"
-                                            style="-fx-background-color: #2196f3;
-                                                   -fx-text-fill: white;
-                                                   -fx-font-weight: bold;
-                                                   -fx-padding: 10 20;
-                                                   -fx-background-radius: 5;
-                                                   -fx-cursor: hand;"/>
+                                    <Button text="SEARCH" onAction="#matchRegex"
+                                            style="-fx-background-color: #1a5f7a;
+                                           -fx-text-fill: white;
+                                           -fx-font-weight: bold;
+                                           -fx-padding: 10 20;
+                                           -fx-background-radius: 5;
+                                           -fx-cursor: hand;
+                                           -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);"
+                                            styleClass="search-button"/>
                                     <Button text="DELETE" onAction="#deleteData"
-                                            style="-fx-background-color: #f44336;
+                                            style="-fx-background-color: #470a0a;
                                                    -fx-text-fill: white;
                                                    -fx-font-weight: bold;
                                                    -fx-padding: 10 20;
@@ -217,8 +239,8 @@
                                               -fx-font-size: 12px;
                                               -fx-font-weight: bold;"/>
                                 <ListView fx:id="dataList"
-                                          prefHeight="300"
-                                          maxHeight="400"
+                                          prefHeight="400"
+                                          maxHeight="500"
                                           VBox.vgrow="ALWAYS"
                                           style="-fx-background-color: #2b2b2b;
                                                -fx-control-inner-background: #2b2b2b;
@@ -242,7 +264,7 @@
                 </Tab>
                 <Tab text="Regex Examples" closable="false">
                     <StackPane style="-fx-background-color: rgba(255,255,255,0.05);
-                    -fx-background-radius: 10;">
+                      -fx-background-radius: 10;">
                         <padding>
                             <Insets top="20" right="20" bottom="20" left="20"/>
                         </padding>
@@ -252,7 +274,7 @@
                             <HBox alignment="CENTER">
                                 <Label text="Common Regex Examples"
                                        style="-fx-text-fill: #ffffff;
-                              -fx-font-size: 24px;
+                              -fx-font-size: 28px;
                               -fx-font-weight: bold;"/>
                             </HBox>
 
@@ -260,20 +282,22 @@
                             <VBox spacing="5" VBox.vgrow="ALWAYS">
                                 <Label text="Examples"
                                        style="-fx-text-fill: #9ea7ad;
-                              -fx-font-size: 12px;
+                              -fx-font-size: 16px;
                               -fx-font-weight: bold;"/>
                                 <ListView fx:id="examplesList"
-                                          prefHeight="300"
-                                          maxHeight="400"
+                                          prefHeight="500"
+                                          maxHeight="600"
                                           VBox.vgrow="ALWAYS"
                                           style="-fx-background-color: #2b2b2b;
                                  -fx-control-inner-background: #2b2b2b;
                                  -fx-background-radius: 5;
-                                 -fx-padding: 10;">
+                                 -fx-padding: 10;
+                                 -fx-font-size: 18px; ">
                                     <style>
                                         .list-cell {
                                         -fx-text-fill: white;
                                         -fx-padding: 10;
+                                        -fx-font-size: 18px; /* Increased font size for cells */
                                         -fx-background-color: #2b2b2b;
                                         }
                                         .list-cell:filled:selected {

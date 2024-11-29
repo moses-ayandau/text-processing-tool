@@ -92,16 +92,22 @@ public class RegexController {
 
         try {
             Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(text);
+            String[] lines = text.split("\n");
 
             StringBuilder matches = new StringBuilder();
-            while (matcher.find()) {
-                matches.append("Match: '").append(matcher.group())
-                        .append("' at positions [").append(matcher.start())
-                        .append(", ").append(matcher.end()).append("]\n");
+            for (int lineNumber = 0; lineNumber < lines.length; lineNumber++) {
+                String line = lines[lineNumber];
+                Matcher matcher = pattern.matcher(line);
+
+                while (matcher.find()) {
+                    matches.append("Match: '").append(matcher.group())
+                            .append("' in line ").append((lineNumber + 1))
+                            .append(" at positions [").append(matcher.start())
+                            .append(", ").append(matcher.end()).append("]\n");
+                }
             }
 
-            resultOutput.setText(matches.length() > 0 ? matches.toString() : "No matches found.");
+            resultOutput.setText(!matches.isEmpty() ? matches.toString() : "No matches found.");
         } catch (Exception e) {
             showAlert("Error", "Invalid regex pattern: " + e.getMessage(), Alert.AlertType.ERROR);
         }
@@ -210,6 +216,9 @@ public class RegexController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Regex Details");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+
+        fileChooser.setInitialFileName("RegexDetails.txt");
+
         File file = fileChooser.showSaveDialog(null);
 
         if (file != null) {
@@ -219,6 +228,7 @@ public class RegexController {
                 writer.write("Replacement Text: " + replacement + "\n");
                 writer.write("Result Text: " + result + "\n");
                 showAlert("Success", "File saved successfully to: " + file.getAbsolutePath(), Alert.AlertType.INFORMATION);
+                clearFields();
             } catch (IOException e) {
                 showAlert("Error", "Failed to save the file: " + e.getMessage(), Alert.AlertType.ERROR);
             }
@@ -254,6 +264,15 @@ public class RegexController {
             }
         }
     }
+
+    private void clearFields() {
+        regexInput.clear();
+        textInput.clear();
+        replaceInput.clear();
+        resultOutput.clear();
+        addReplacementToCollectionButton.setDisable(true);
+    }
+
 
 
     private void showAlert(String title, String message, Alert.AlertType alertType) {
